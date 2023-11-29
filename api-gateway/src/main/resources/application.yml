@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: customer-service
+          uri:
+            lb://customer-service
+          predicates:
+            - Path=/customers/**
+
+        - id: transaction-service
+          uri:
+            lb://transaction-service
+          predicates:
+            - Path=/transactions/**
+
+        - id: account-service
+          uri:
+            lb://account-service
+          predicates:
+            - Path=/accounts/**
+
+
+
+
+server:
+  port: 6969
+
+eureka:
+  instance:
+    hostname: localhost
+
+  client:
+    fetch-registry: true
+    register-with-eureka: true
