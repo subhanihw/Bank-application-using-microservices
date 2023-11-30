@@ -14,20 +14,30 @@ spring:
             lb://customer-service
           predicates:
             - Path=/customers/**
+          filters:
+            - AuthenticationFilter
 
         - id: transaction-service
           uri:
             lb://transaction-service
           predicates:
             - Path=/transactions/**
+          filters:
+            - AuthenticationFilter
 
         - id: account-service
           uri:
             lb://account-service
           predicates:
             - Path=/accounts/**
+          filters:
+            - AuthenticationFilter
 
-
+        - id: identity-service
+          uri:
+            lb://identity-service
+          predicates:
+            - Path=/auth/**
 
 
 server:
