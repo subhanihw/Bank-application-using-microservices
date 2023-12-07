@@ -15,11 +15,10 @@ import lombok.ToString;
 public class CreateAccountDTO {
     @NotBlank(message = "Account Type cannot be empty")
     private String accountType;
-    @NotBlank(message = "Initial balance cannot be empty")
     @NotNull(message = "Amount cannot be null")
     @Positive(message = "Amount must be positive")
     private double balance;
     private double interestRate;
-    @NotBlank(message = "Please assign some customer Id to account")
+    @Positive(message = "Please assign valid customer Id to account")
     private int customerId;
 }

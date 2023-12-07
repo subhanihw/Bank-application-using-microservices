@@ -6,6 +6,7 @@ import com.nobita.microservices.accountservice.exceptions.InvalidAccountTypeExce
 import com.nobita.microservices.accountservice.models.Account;
 import com.nobita.microservices.accountservice.models.CreateAccountDTO;
 import com.nobita.microservices.accountservice.service.AccountService;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class AccountController {
         return ResponseEntity.ok(accountService.saveAccount(account));
     }
     @PostMapping("/accounts")
-    public ResponseEntity<Account> createAccount(@RequestBody CreateAccountDTO accountDTO) throws InvalidAccountTypeException, CustomerNotFoundException {
+    public ResponseEntity<Account> createAccount(@Valid @RequestBody CreateAccountDTO accountDTO) throws InvalidAccountTypeException, CustomerNotFoundException {
         Account account = modelMapper.map(accountDTO, Account.class);
         return ResponseEntity.ok(accountService.addAccount(account));
     }
