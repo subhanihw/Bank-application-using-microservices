@@ -8,6 +8,8 @@ import com.nobita.microservices.accountservice.models.CreateAccountDTO;
 import com.nobita.microservices.accountservice.service.AccountService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,7 @@ import java.util.List;
 
 @RestController
 public class AccountController {
+    private Logger logger = LoggerFactory.getLogger(AccountController.class);
     private final AccountService accountService;
     private final ModelMapper modelMapper;
 
@@ -26,6 +29,7 @@ public class AccountController {
 
     @GetMapping("/accounts")
     public ResponseEntity<List<Account>> getAllAccounts() {
+        logger.info("Get All Account is Called");
         return ResponseEntity.ok(accountService.getAllAccounts());
     }
 
